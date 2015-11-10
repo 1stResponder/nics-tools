@@ -1,0 +1,517 @@
+<!--
+
+    Copyright (c) 2008-2015, Massachusetts Institute of Technology (MIT)
+    All rights reserved.
+
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are met:
+
+    1. Redistributions of source code must retain the above copyright notice, this
+    list of conditions and the following disclaimer.
+
+    2. Redistributions in binary form must reproduce the above copyright notice,
+    this list of conditions and the following disclaimer in the documentation
+    and/or other materials provided with the distribution.
+
+    3. Neither the name of the copyright holder nor the names of its contributors
+    may be used to endorse or promote products derived from this software without
+    specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+    DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+    FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+    DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+    SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+    CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+    OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+    OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>edu.mit.ll.nics.tools</groupId>
+	<artifactId>master-pom</artifactId>
+	<version>6.1</version>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>openam-tools</module>	
+		<module>sso-tools</module>
+		<module>user-management-tools</module>
+	</modules>
+
+	<properties>
+		<apache-poi-version>3.9</apache-poi-version>
+		<commons-logging.version>1.1.1</commons-logging.version>
+		<commons-cli.version>1.2</commons-cli.version>
+		<commons-codec.version>1.5</commons-codec.version>
+		<httpclient.version>3.1</httpclient.version>
+		<jasypt.version>1.9.0</jasypt.version>
+		<openam.version>12.0.0</openam.version>
+		<amqclient-version>2.7.1</amqclient-version>
+		<cxf.version>3.0.3</cxf.version>
+		<spring.version>4.1.4.RELEASE</spring.version>
+		<junit.version>4.8.2</junit.version>
+		<!-- <camel.version>2.10.1</camel.version> -->
+		<jackson.version>1.9.7</jackson.version>
+		<log4j.version>1.2.17</log4j.version>
+		<slf4j.version>1.7.5</slf4j.version>
+		<vivid-jts.version>1.13</vivid-jts.version>
+		<geotools.version>10.2</geotools.version>
+		<esapi.version>2.1.0</esapi.version>
+		<compiler.plugin.version>2.5.1</compiler.plugin.version>
+		<java.compiler.version>1.6</java.compiler.version>
+		<kml-jaxb.version>2.2</kml-jaxb.version>
+		<postgresql.version>9.3-1102-jdbc4</postgresql.version>
+		<json.version>20090211</json.version>
+		<servlet-version>2.5</servlet-version>
+		<testng.version>6.8</testng.version>
+		<license.plugin.version>1.9.0</license.plugin.version>
+	</properties>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>edu.mit.ll.em.api</groupId>
+				<artifactId>api-rest-common</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>edu.mit.ll.nics.common</groupId>
+				<artifactId>entities</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>edu.mit.ll.nics.common</groupId>
+				<artifactId>nics-dao</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>edu.mit.ll.nics.common</groupId>
+				<artifactId>geoserver-rest-api</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>edu.mit.ll.nics.common</groupId>
+				<artifactId>web-service-request-lib</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>edu.mit.ll.nics.common</groupId>
+				<artifactId>rabbitmq-client</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>edu.mit.ll.nics.common</groupId>
+				<artifactId>messages</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>edu.mit.ll.nics.common</groupId>
+				<artifactId>encryption-lib</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>edu.mit.ll.nics.common</groupId>
+				<artifactId>hash-lib</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>edu.mit.ll.nics.common</groupId>
+				<artifactId>rabbitmq-admin-interface</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+                <groupId>edu.mit.ll.nics.tools</groupId>
+                <artifactId>sso-tools</artifactId>
+                <version>${project.version}</version>
+            </dependency>	
+			<dependency>
+				<groupId>org.postgresql</groupId>
+				<artifactId>postgresql</artifactId>
+				<version>${postgresql.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-web</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.owasp.esapi</groupId>
+				<artifactId>esapi</artifactId>
+				<version>${esapi.version}</version>
+			</dependency>
+			<!-- <dependency> <groupId>org.apache.camel</groupId> <artifactId>camel-spring</artifactId> 
+				<version>${camel.version}</version> </dependency> <dependency> <groupId>org.apache.camel</groupId> 
+				<artifactId>camel-jackson</artifactId> <version>${camel.version}</version> 
+				</dependency> -->
+			<dependency>
+				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-mapper-asl</artifactId>
+				<version>${jackson.version}</version>
+				<type>jar</type>
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-jaxrs</artifactId>
+				<version>${jackson.version}</version>
+				<type>jar</type>
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-xc</artifactId>
+				<version>${jackson.version}</version>
+				<type>jar</type>
+			</dependency>
+
+			<dependency>
+				<groupId>org.eclipse.jetty</groupId>
+		    <artifactId>jetty-server</artifactId>
+				<version>9.2.6.v20141205</version>
+			</dependency>
+
+			<dependency>
+		    <groupId>org.eclipse.jetty</groupId>
+		    <artifactId>jetty-util-ajax</artifactId>
+		    <version>9.2.6.v20141205</version>
+		</dependency>
+
+			<!-- CXF Rest Dependency --><!-- 3.0.3 does away with the bundle, so need to get them individually 
+			<dependency>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-bundle-jaxrs</artifactId>
+				<version>${cxf.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.eclipse.jetty</groupId>
+						<artifactId>jetty-server</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.apache.geronimo.specs</groupId>
+						<artifactId>geronimo-activation_1.1_spec</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.apache.geronimo.specs</groupId>
+						<artifactId>geronimo-javamail_1.4_spec</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>commons-logging</groupId>
+						<artifactId>commons-logging</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>-->
+
+			<!-- Log4j Dependencies -->
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>${log4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
+			<dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-simple</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>jcl-over-slf4j</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-log4j12</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.rabbitmq</groupId>
+				<artifactId>amqp-client</artifactId>
+				<version>${amqclient-version}</version>
+			</dependency>
+
+			<!-- PAPI External Dependencies -->
+
+			<dependency>
+				<groupId>com.google.code.gson</groupId>
+				<artifactId>gson</artifactId>
+				<version>2.2.3</version>
+			</dependency>
+
+			<dependency>
+				<groupId>joda-time</groupId>
+				<artifactId>joda-time</artifactId>
+				<version>2.2</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.vividsolutions</groupId>
+				<artifactId>jts</artifactId>
+				<version>${vivid-jts.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.geotools</groupId>
+				<artifactId>gt-referencing</artifactId>
+				<version>${geotools.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.geotools</groupId>
+				<artifactId>gt-geometry</artifactId>
+				<version>${geotools.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.geotools</groupId>
+				<artifactId>gt-epsg-extension</artifactId>
+				<version>${geotools.version}</version>
+			</dependency>				
+
+
+			 <!-- OpenAM -->
+            <dependency>
+                <groupId>org.forgerock.openam</groupId>
+                <artifactId>openam-clientsdk</artifactId>
+                <version>${openam.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.forgerock.openam</groupId>
+                <artifactId>openam-shared</artifactId>
+                <version>${openam.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.forgerock.openam</groupId>
+                <artifactId>openam-federation-library</artifactId>
+                <version>${openam.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.forgerock.openam</groupId>
+                <artifactId>openam-idpdiscovery</artifactId>
+                <version>${openam.version}</version>
+            </dependency>
+
+			<!-- sso-tools -->
+            <dependency>
+                <groupId>edu.mit.ll.nics.tools</groupId>
+                <artifactId>openam-tools</artifactId>
+				<version>${project.version}</version>
+            </dependency>
+			<dependency>
+				<groupId>commons-codec</groupId>
+				<artifactId>commons-codec</artifactId>
+				<version>${commons-codec.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-cli</groupId>
+				<artifactId>commons-cli</artifactId>
+				<version>${commons-cli.version}</version>
+			</dependency>
+            <dependency>
+                <groupId>org.jasypt</groupId>
+                <artifactId>jasypt</artifactId>
+				<version>${jasypt.version}</version>
+            </dependency>
+
+
+			<!-- openam-tools -->
+			<dependency>
+	            <groupId>commons-httpclient</groupId>
+                <artifactId>commons-httpclient</artifactId>
+                <version>${httpclient.version}</version>
+            </dependency>
+			<dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi</artifactId>
+            	<version>${apache-poi-version}</version>
+            </dependency>
+			<dependency>
+            	<groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+                <version>${apache-poi-version}</version>
+            </dependency>
+			<dependency>
+	            <groupId>commons-logging</groupId>
+                <artifactId>commons-logging</artifactId>
+                <version>${commons-logging.version}</version>
+            </dependency>
+		    <dependency>
+           		<groupId>javax.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>${servlet-version}</version>
+            </dependency>
+			<dependency>
+                <groupId>org.testng</groupId>
+                <artifactId>testng</artifactId>
+                <version>${testng.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+			<!-- JUnit Dependencies -->
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>javax.ws.rs</groupId>
+				<artifactId>javax.ws.rs-api</artifactId>
+				<version>2.0.1</version>
+			</dependency>
+		<dependency>
+			<groupId>net.opengis.kml</groupId>
+			<artifactId>kml-JAXB-schema</artifactId>
+			<version>${kml-jaxb.version}</version>
+		</dependency>
+		<dependency>
+				<groupId>org.geotools</groupId>
+				<artifactId>gt-cql</artifactId>
+				<version>${geotools.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.geotools</groupId>
+				<artifactId>gt-epsg-hsql</artifactId>
+				<version>${geotools.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.geotools.jdbc</groupId>
+				<artifactId>gt-jdbc-postgis</artifactId>
+				<version>${geotools.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.geotools</groupId>
+				<artifactId>gt-opengis</artifactId>
+				<version>${geotools.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.geotools</groupId>
+				<artifactId>gt-shapefile</artifactId>
+				<version>${geotools.version}</version>
+			</dependency>
+			<dependency>
+		        <groupId>org.geotools</groupId>
+		        <artifactId>gt-wfs</artifactId>
+		        <version>${geotools.version}</version>
+		    </dependency>
+			<dependency>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-rt-frontend-jaxrs</artifactId>
+				<version>${cxf.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-rt-frontend-jaxws</artifactId>
+				<version>${cxf.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.json</groupId>
+				<artifactId>json</artifactId>
+				<version>${json.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<!-- Manages versions and configuration of plugins for all child poms -->
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<!-- Maven compiler plugin for specifying java compiler options -->
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${compiler.plugin.version}</version>
+					<configuration>
+						<source>${java.compiler.version}</source>
+						<target>${java.compiler.version}</target>
+					</configuration>
+				</plugin>
+			
+				<plugin>
+                    <!-- This plugin formats source files by checking and adding a copyright 
+                        header if it's missing. -->
+                    <groupId>com.mycila.maven-license-plugin</groupId>
+                    <artifactId>maven-license-plugin</artifactId>
+                    <version>${license.plugin.version}</version>
+                    <configuration>
+                        <aggregate>true</aggregate>
+                        <header>${basedir}/copyright.txt</header>
+                        <strictCheck>true</strictCheck>
+                        <properties>
+                            <year>2015</year>
+                        </properties>
+                        <useDefaultExcludes>false</useDefaultExcludes>
+
+                        <!-- Additional file-to-comment-style mappings -->
+                        <mapping>
+                            <xslt>XML_STYLE</xslt>
+                        </mapping>
+
+                        <excludes>
+                            <!-- Some default excludes -->
+                            <exclude>**/*~</exclude>
+                            <exclude>**/*.jar</exclude>
+                            <exclude>**/*.zip</exclude>
+                            <exclude>**/*.tar*</exclude>
+                            <exclude>**/*.pdf</exclude>
+                            <exclude>**/*.jpg</exclude>
+                            <exclude>**/*.png</exclude>
+                            <exclude>**/*.gif</exclude>
+                            <exclude>**/*.ico</exclude>
+                            <exclude>**/*.bmp</exclude>
+                            <exclude>**/*.tif*</exclude>
+                            <exclude>**/*.cr2</exclude>
+                            <exclude>**/MANIFEST.MF</exclude>
+                            <exclude>**/.classpath</exclude>
+                            <exclude>**/.project</exclude>
+                            <exclude>**/.settings/**</exclude>
+                            <exclude>**/target/**</exclude>
+                            <exclude>**/test-output/**</exclude>
+			    			<exclude>**/META-INF/services/**</exclude>
+                            <exclude>**/.git</exclude>
+                            <exclude>**/.gitignore</exclude>
+                            <exclude>**/.git/**</exclude>
+                            <exclude>**/*.log</exclude>
+                            <exclude>**/*.txt</exclude>
+
+                            <!-- Project-specific excludes -->
+                        </excludes>
+                    </configuration>
+                    <inherited>false</inherited>
+                    <executions>
+                        <execution>
+                            <id>update-copyright</id>
+                            <phase>generate-sources</phase>
+                            <goals>
+                                <goal>format</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>verify-copyright</id>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<plugin>
+                <groupId>com.mycila.maven-license-plugin</groupId>
+                <artifactId>maven-license-plugin</artifactId>
+            </plugin>
+		</plugins>
+	</build>
+	<repositories>
+		<repository>
+			<id>forgerock</id>
+			<name>ForgeRock</name>
+			<url>http://maven.forgerock.org/repo/repo</url>
+		</repository>
+	</repositories>
+</project>
