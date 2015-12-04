@@ -70,6 +70,7 @@
 		<servlet-version>2.5</servlet-version>
 		<testng.version>6.8</testng.version>
 		<license.plugin.version>1.9.0</license.plugin.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -511,7 +512,7 @@
 		<repository>
 			<id>forgerock</id>
 			<name>ForgeRock</name>
-			<url>http://maven.forgerock.org/repo/repo</url>
+			<url>http://maven.forgerock.org/repo/releases</url>
 		</repository>
 	</repositories>
 </project>
