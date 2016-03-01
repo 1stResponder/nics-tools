@@ -341,6 +341,11 @@ public class SSOUtil
 		return false;
 	}
 
+	public boolean resetPassword(String username)
+	{
+		return utils.resetPassword(username);
+	}
+
 	public void info(String msg)
 	{
 		log.info(msg);

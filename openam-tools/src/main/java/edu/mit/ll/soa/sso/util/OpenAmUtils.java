@@ -285,8 +285,6 @@ public class OpenAmUtils extends OpenAmBaseUtil
 		return false;
 	}
 
-
-
 	public boolean createAgent(String name, boolean active)
 	{
 		// TODO

@@ -15,3 +15,7 @@ release.properties
 *~
 *.swp
 *.swo
+
+# intellij
+.idea/
+*.iml

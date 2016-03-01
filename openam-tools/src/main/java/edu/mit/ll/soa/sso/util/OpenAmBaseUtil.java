@@ -42,13 +42,13 @@ import edu.mit.ll.soa.sso.exception.InitializationException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
+import org.json.JSONObject;
 
 import javax.security.auth.callback.*;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.*;
 import java.net.InetAddress;
 import java.nio.file.Files;
@@ -99,6 +99,8 @@ public abstract class OpenAmBaseUtil
 	private static final String OPENAM_PROPERTIES_PATH_PROP = "openamPropertiesPath";
 	private static final String OPENAM_TOOLS_PROPERTIES = "openam-tools.properties";
 	private static final String AMCONFIG_PROPERTIES = "AMConfig.properties";
+
+	private String forgotpasswordUrl = null;
 
 	private boolean checkInitParams(Map<String, String> params)
 	{
@@ -1269,6 +1271,18 @@ public abstract class OpenAmBaseUtil
 		return null;
 	}
 
+	private void setForgotpasswordUrl(String path)
+	{
+		final String forgotContext = "json/users?_action=forgotPassword";
+		if (path.trim().endsWith("/"))
+		{
+			this.forgotpasswordUrl = path + forgotContext;
+		} else
+		{
+			this.forgotpasswordUrl = path +"/"+ forgotContext;
+		}
+	}
+
 	private void setAmConfigProperties(Properties p, Map<String, String> params)
 	{
 		String path = params.get(OpenAmUtilConstants.IDP_PATH);
@@ -1281,6 +1295,7 @@ public abstract class OpenAmBaseUtil
 		else
 			fullPath += "/" + path;
 
+		setForgotpasswordUrl(fullPath);
 
 		setAmServerProps(p, protocol, host, port, path);
 		setCertProp(p, host);
@@ -1358,6 +1373,38 @@ public abstract class OpenAmBaseUtil
 		System.setProperty("com.iplanet.am.naming.url", url);
 	}
 
+	public boolean resetPassword(final String username)
+	{
+		try
+		{
+			_log.info("Using forgotpassword url: " + forgotpasswordUrl);
+			URL forgotpasswordURL = new URL(forgotpasswordUrl);
+			HttpURLConnection httpURLConnection = (HttpURLConnection) forgotpasswordURL.openConnection();
+			httpURLConnection.setDoOutput(true);
+			httpURLConnection.setRequestMethod("POST");
+			httpURLConnection.setRequestProperty("Content-type",
+					"application/json");
 
+			OutputStreamWriter osw = new OutputStreamWriter(httpURLConnection.getOutputStream());
+			JSONObject json = new JSONObject();
+			json.put("username", username);
+			osw.write(json.toString());
+			osw.flush();
+
+			int responseCode = httpURLConnection.getResponseCode();
+			if (responseCode == HttpURLConnection.HTTP_OK) {
+				_log.debug("Password Reset Request Successful.");
+				return true;
+			} else {
+				_log.debug("Password Reset Request Failued; Response "
+						+ "Code: " + responseCode);
+			}
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+
+		return false;
+	}
 }
 
