@@ -37,7 +37,7 @@
 	<parent>
         <artifactId>master-pom</artifactId>
         <groupId>edu.mit.ll.nics.tools</groupId>
-        <version>6.1.2</version>
+        <version>6.2</version>
         <relativePath>..</relativePath>
     </parent>
 
