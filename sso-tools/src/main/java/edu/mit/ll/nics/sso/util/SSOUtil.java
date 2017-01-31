@@ -170,6 +170,8 @@ public class SSOUtil
 	public String login(String user, String pass, String realm) {
 		String token = null;
 		
+		//log.info("Username: " + user ", Password: " + pass + ", realm: " + realm);
+		
 		try {
 			token = utils.login(user, pass, realm);
 		} catch(AuthException ae) {
@@ -320,9 +322,13 @@ public class SSOUtil
 	}
 	
 	public boolean loginAsAdmin(String realm) {
+		
+		log.info("username: " + getUsername());
 				
 		String token = login(getUsername(), getPassword(), realm);
+		log.info("token: " + token);
 		if(token != null && !token.isEmpty()) {
+			log.info("Login successfull.");
 			return true;
 		}
 		
@@ -379,12 +385,14 @@ public class SSOUtil
 
 				String prop = System.getProperty(DECODE_PROPERTY);
 				if (prop == null) prop = "secretpassword";
+				log.info("Prop: "+ prop);
 				final String decode = prop;
 
 				if (decode != null)
 				{
 					encryptor.setPassword(decode);
 					encryptor.setAlgorithm(getProperty(ALGORITHM));
+					log.info("Algorithm: " + getProperty(ALGORITHM));
 
 					if (!encryptor.isInitialized())
 					{
@@ -404,6 +412,7 @@ public class SSOUtil
 
 		String username = null;
 		username = getProperty(CREATOR_USER);
+		log.info(username);
 		if (username != null)
 		{
 			return encryptor.decrypt(username);
@@ -417,7 +426,9 @@ public class SSOUtil
 		initEncryptor();
 
 		String pass = null;
+		
 		pass = getProperty(CREATOR_PASS);
+		log.info(pass);
 		if (pass != null)
 		{
 			return encryptor.decrypt(pass);
