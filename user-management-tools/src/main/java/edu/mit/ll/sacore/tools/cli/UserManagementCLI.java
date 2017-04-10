@@ -28,7 +28,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 /**
- * 
+ *  Requires OpenAM!!
  */
 package edu.mit.ll.sacore.tools.cli;
 
