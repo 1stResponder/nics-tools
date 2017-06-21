@@ -57,6 +57,8 @@ import edu.mit.ll.nics.sso.util.SSOUtil;
  * The ldif files produced must be executed separately on the NICS
  * Identity instance that houses our OpenLDAP instance.
  * 
+ * For OpenAM
+ *
  * TODO: Currently only supports creating two LDIF files, one for
  * 		adding users in the NICS db to LDAP, and one for adding
  * 		the aforementioned users to the "nics" group on the LDAP

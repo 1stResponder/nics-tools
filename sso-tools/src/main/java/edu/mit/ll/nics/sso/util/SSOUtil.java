@@ -65,6 +65,11 @@ public class SSOUtil
 
 	private OpenAmUtils utils = null;
 
+	private String decodePhrase;
+	private String algo;
+	private String creatorUser;
+	private String creatorPass;
+
 	public SSOUtil()
 	{
 		initialize();
@@ -136,6 +141,16 @@ public class SSOUtil
 		{
 			ie.printStackTrace();
 		}
+
+		algo = getProperty(ALGORITHM);
+		creatorUser = getProperty(CREATOR_USER);
+		creatorPass = getProperty(CREATOR_PASS);
+		decodePhrase = getProperty(DECODE_PROPERTY);
+
+		if(decodePhrase == null || decodePhrase.equals(""))
+		{
+			decodePhrase = System.getProperty(DECODE_PROPERTY,"secretpassword");
+		}
 	}
 
 	/**
@@ -169,6 +184,8 @@ public class SSOUtil
 	 */
 	public String login(String user, String pass, String realm) {
 		String token = null;
+		
+		//log.info("Username: " + user ", Password: " + pass + ", realm: " + realm);
 		
 		try {
 			token = utils.login(user, pass, realm);
@@ -323,6 +340,7 @@ public class SSOUtil
 				
 		String token = login(getUsername(), getPassword(), realm);
 		if(token != null && !token.isEmpty()) {
+			log.info("Login successfull.");
 			return true;
 		}
 		
@@ -376,15 +394,12 @@ public class SSOUtil
 			if (encryptor == null)
 			{
 				encryptor = new StandardPBEStringEncryptor();
-
-				String prop = System.getProperty(DECODE_PROPERTY);
-				if (prop == null) prop = "secretpassword";
-				final String decode = prop;
+				final String decode = decodePhrase;
 
 				if (decode != null)
 				{
 					encryptor.setPassword(decode);
-					encryptor.setAlgorithm(getProperty(ALGORITHM));
+					encryptor.setAlgorithm(algo);
 
 					if (!encryptor.isInitialized())
 					{
@@ -401,12 +416,9 @@ public class SSOUtil
 	private String getUsername()
 	{
 		initEncryptor();
-
-		String username = null;
-		username = getProperty(CREATOR_USER);
-		if (username != null)
+		if (creatorUser != null)
 		{
-			return encryptor.decrypt(username);
+			return encryptor.decrypt(creatorUser);
 		}
 
 		return null;
@@ -415,12 +427,9 @@ public class SSOUtil
 	private String getPassword()
 	{
 		initEncryptor();
-
-		String pass = null;
-		pass = getProperty(CREATOR_PASS);
-		if (pass != null)
+		if (creatorPass != null)
 		{
-			return encryptor.decrypt(pass);
+			return encryptor.decrypt(creatorPass);
 		}
 
 

@@ -1385,6 +1385,8 @@ public abstract class OpenAmBaseUtil
 			httpURLConnection.setRequestProperty("Content-type",
 					"application/json");
 
+			_log.debug("Username: " + username);	
+
 			OutputStreamWriter osw = new OutputStreamWriter(httpURLConnection.getOutputStream());
 			JSONObject json = new JSONObject();
 			json.put("username", username);
@@ -1396,8 +1398,13 @@ public abstract class OpenAmBaseUtil
 				_log.debug("Password Reset Request Successful.");
 				return true;
 			} else {
-				_log.debug("Password Reset Request Failued; Response "
+				
+				Scanner s = new Scanner(httpURLConnection.getErrorStream()).useDelimiter("\\A");
+				String error = s.hasNext() ? s.next() : "";
+
+				_log.debug("Password Reset Request Failed; Response "
 						+ "Code: " + responseCode);
+				_log.debug("Reset Error: " + error);
 			}
 		} catch (Exception e)
 		{
