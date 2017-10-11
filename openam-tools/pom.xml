@@ -80,7 +80,7 @@
             <systemPath>${java.home}/../lib/tools.jar</systemPath>
         </dependency>
         <dependency>
-            <groupId>org.forgerock.openam</groupId>
+            <groupId>org.forgerock.ce.openam</groupId>
             <artifactId>openam-clientsdk</artifactId>
             <version>${openam.version}</version>
         </dependency>
